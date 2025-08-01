@@ -12,7 +12,7 @@ type Profile struct {
 	Username    string       `json:"username"`
 	Phone       string       `json:"phone"`
 	Bio         string       `json:"bio"`
-	EmojiStatus *EmojiStatus `json:",inline"`
+	EmojiStatus *EmojiStatus `json:"emoji_status"`
 }
 
 type StatusInfo struct {
@@ -32,7 +32,7 @@ type WeeklyOpen struct {
 
 type WorkHours struct {
 	Timezone   string       `json:"timezone"`
-	WeeklyOpen []WeeklyOpen `json:",inline"`
+	WeeklyOpen []WeeklyOpen `json:"weekly_open"`
 }
 
 type GeoPoint struct {
@@ -42,18 +42,22 @@ type GeoPoint struct {
 
 type Location struct {
 	Address  string    `json:"address"`
-	GeoPoint *GeoPoint `json:",inline"`
+	GeoPoint *GeoPoint `json:"geo_point"`
 }
 
 type BusinessInfo struct {
-	WorkHours WorkHours `json:",inline"`
-	Location  *Location `json:",inline"`
+	WorkHours WorkHours `json:"work_hours"`
+	Location  *Location `json:"location"`
 }
 
 type CollectibleInfo struct {
 	Username   string `json:"username"`
 	IsActive   bool   `json:"is_active"`
 	IsEditable bool   `json:"is_editable"`
+}
+
+type CollectiblesInfoContainer struct {
+	Usernames []CollectibleInfo `json:"usernames"`
 }
 
 type PremiumInfo struct {
@@ -69,11 +73,11 @@ type UserFlags struct {
 }
 
 type User struct {
-	Profile          *Profile           `json:",inline"`
-	StatusInfo       *StatusInfo        `json:",inline"`
-	PhotoInfo        *PhotoInfo         `json:",inline"`
-	BusinessInfo     *BusinessInfo      `json:",inline"`
-	CollectiblesInfo *[]CollectibleInfo `json:",inline"`
-	PremiumInfo      *PremiumInfo       `json:",inline"`
-	UserFlags        *UserFlags         `json:",inline"`
+	Profile          *Profile                   `json:"profile"`
+	StatusInfo       *StatusInfo                `json:"status_info"`
+	PhotoInfo        *PhotoInfo                 `json:"photo_info"`
+	BusinessInfo     *BusinessInfo              `json:"business_info"`
+	CollectiblesInfo *CollectiblesInfoContainer `json:"collectibles_info"`
+	PremiumInfo      *PremiumInfo               `json:"premium_info"`
+	UserFlags        *UserFlags                 `json:"flags"`
 }

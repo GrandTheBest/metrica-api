@@ -21,6 +21,8 @@ func NewClient(opts ...Option) *Client {
 		baseURL: "https://api.chunkbyte.space",
 	}
 
+	client.httpClient = &http.Client{Timeout: 30}
+
 	for _, opt := range opts {
 		opt(client)
 	}
